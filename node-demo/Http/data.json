@@ -1,0 +1,18 @@
+[
+    {
+        "id" : 1,
+        "motto" : "message 1"
+    },
+    {
+        "id" : 2,
+        "motto" : "message 2"
+    },
+    {
+        "id" : 3,
+        "motto" : "message 3"
+    },
+    {
+        "id" : 4,
+        "motto" : "message 4"
+    }
+]
