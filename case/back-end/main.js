@@ -11,9 +11,4 @@ app.get("/", async (req, res) => {
   return res.status(200).json(JSON.parse(data));
 });
 
-app.post("/", (req, res) => {
-  
-  return res.status(200).json(JSON.parse(data));
-});
-
 app.listen(5000);
