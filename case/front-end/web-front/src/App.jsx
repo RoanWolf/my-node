@@ -1,9 +1,9 @@
-import Form from './components/case2-post/form'
+import Todolist from './components/case3-todolist/todolist'
 function App() {
 
   return (
     <>
-      <Form />
+      <Todolist />
     </>
   )
 }
