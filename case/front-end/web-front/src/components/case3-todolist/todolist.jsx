@@ -58,7 +58,7 @@ const TodoList = () => {
     setTasks(tasks.filter((task) => task.id !== taskId));
 
     const response = await fetch("http://localhost:5000/data/del", {
-      method: "POST",
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },

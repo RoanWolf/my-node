@@ -21,7 +21,7 @@ app.post("/data/add", async (req, res) => {
   return res.status(200).json({ message: "Data added successfully" });
 });
 // Delete a task
-app.post("/data/del", async (req, res) => {
+app.delete("/data/del", async (req, res) => {
   const { id } = req.body;
   const data = await readFile("./assets/tododata.json", "utf-8");
   const tododata = JSON.parse(data);
