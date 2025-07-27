@@ -1,7 +1,18 @@
 import app from './app.js';
+import { initDB } from './db/index.js';
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Example app listening on port http://localhost:${port}`);
-});
+async function startServer() {
+  try {
+    await initDB();
+    app.listen(port, () => {
+      console.log(`listening on port http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error('Failed to start server:', error);
+    process.exit(1);
+  }
+}
+
+startServer();
