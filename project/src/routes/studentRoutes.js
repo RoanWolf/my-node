@@ -1,13 +1,8 @@
-import express from 'express';
-import { getStudent } from '../controllers/studentController.js';
-import { validateStudentId } from '../middleware/studentValidation.js';
-const router = express.Router();
+import {Router} from 'express';
+import {getAllStudent} from '../controllers/studentController.js';
 
-/**
- * @route   GET /api/students
- * @desc    Get student by ID
- * @access  Public
- */
-router.route('/students').get(validateStudentId, getStudent);
+const router = Router();
+
+router.get('/student', getAllStudent);
 
 export default router;
