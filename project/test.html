@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提交待办事项</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        textarea {
+            height: 150px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>添加待办事项</h1>
+    <form id="todoForm">
+    <textarea id="content" required></textarea>
+    <button type="submit">提交</button>
+</form>
+
+<script>
+    document.getElementById('todoForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const content = document.getElementById('content').value;
+
+        const response = await fetch('http://localhost:3000/todo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', // 发送 JSON
+            },
+            body: JSON.stringify({ content }), // { content: "..." }
+        });
+
+        const result = await response.text();
+        console.log(result);
+    });
+</script>
+</body>
+</html>

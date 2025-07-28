@@ -1,24 +1,33 @@
 import { DataTypes, sequelize } from '../utils/dbHelper.js';
 
 
-const Student = sequelize.define('Student', {
+const Todo = sequelize.define('Todo', {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true
   },
-  name: {
+  content: {
     type: DataTypes.STRING,
     allowNull: false
   },
-  age: {
-    type: DataTypes.INTEGER,
+  isCompleted: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  remindAt: {
+    type: DataTypes.DATE,
+    allowNull: true
+  },
+  deadline:{
+    type: DataTypes.DATE,
     allowNull: true
   }
+
 }, {
-    tableName: 'students',
+    tableName: 'todos',
     createdAt: false,
     updatedAt: false,
 });
 
-export default Student;
+export default Todo;
