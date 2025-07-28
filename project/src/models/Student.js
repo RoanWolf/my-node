@@ -1,4 +1,4 @@
-import { DataTypes, sequelize } from '../services/studentService.js';
+import { DataTypes, sequelize } from '../utils/dbHelper.js';
 
 
 const Student = sequelize.define('Student', {
