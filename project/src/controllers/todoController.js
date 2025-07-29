@@ -42,7 +42,7 @@ export async function createTodo(req, res) {
 export async function updateTodo(req,res) {
   const {id} = req.params;
   const newTodo = req.body;
-  if(!newTodo || !newTodo.content) {
+  if(!newTodo) {
     return res.status(400).json({ message: "Content is required" });
   }
   newTodo.id = id;
