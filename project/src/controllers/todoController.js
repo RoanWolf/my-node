@@ -3,7 +3,8 @@ import {
   getTodoById as getTodoByIdApi,
   deleteTodoById as deleteTodoByIdApi,
   createTodo as createTodoApi,
-  updateTodo as updateTodoApi
+  updateTodo as updateTodoApi,
+  searchAllTodos as searchAllTodosApi,
 } from "../services/todoService.js";
 
 export async function getTodos(req, res) {
@@ -51,4 +52,13 @@ export async function updateTodo(req,res) {
     message: 'Todo updated successfully',
     data: newTodo,
   }); 
+}
+
+export async function searchAllTodos(req, res) {
+  const {keyword} = req.body;
+  if (!keyword) {
+    return res.status(400).json({ message: "Search keyword is required" });
+  }
+  const todos = await searchAllTodosApi(keyword);
+  res.status(200).json(todos);
 }

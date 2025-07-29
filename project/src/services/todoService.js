@@ -1,4 +1,5 @@
 import Todo from "../models/Todo.js";
+import { Op } from "sequelize";
 export async function getAllTodos() {
   const todos = await Todo.findAll();
 
@@ -26,9 +27,20 @@ export async function createTodo(addTodo) {
 }
 
 export async function updateTodo(updateTodo) {
-  await Todo.update(updateTodo, {
+  const { id, ...fields } = updateTodo;
+  await Todo.update(fields, {
     where: {
-      id: updateTodo.id,
+      id: id,
     },
+  });
+}
+
+export async function searchAllTodos(searchTodo) {
+  return await Todo.findAll({
+    where: {
+      content: {
+        [Op.like]: `%${searchTodo}%`,
+      }
+    }
   });
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 export default function AllTodoTasks() {
   const [TodoTasksArray, setTodoTasksArray] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   async function handleChangeIsCompleted(id, isCompleted) {
     //front
     setTodoTasksArray((prevTasks) =>
@@ -37,14 +38,19 @@ export default function AllTodoTasks() {
     setTodoTasksArray((prevTasks) => [...prevTasks, newTodo.data]);
     setNewTask("");
   }
-  async function handleKeyDown(event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      await handleAddTask(newTask);
-    }
+  async function handleQueryTask(searchQuery) {
+    if (!searchQuery.trim()) return;
+    const response = await fetch(`http://localhost:3000/todo/search`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ keyword: searchQuery }),
+    });
+    const data = await response.json();
+    setTodoTasksArray(data);
   }
+
   return (
-    <div>
+    <>
       <h2>All Todo Tasks</h2>
       <div>
         <input
@@ -52,7 +58,6 @@ export default function AllTodoTasks() {
           placeholder="输入任务名"
           value={newTask}
           onChange={(event) => setNewTask(event.target.value)}
-          onKeyDown={handleKeyDown}
         />
         <button
           onClick={(event) => {
@@ -60,7 +65,6 @@ export default function AllTodoTasks() {
             handleAddTask(newTask);
           }}
         >
-          {" "}
           添加任务
         </button>
       </div>
@@ -87,6 +91,23 @@ export default function AllTodoTasks() {
           </li>
         ))}
       </ul>
-    </div>
+
+      <div>
+        <input
+          type="text"
+          placeholder="输入查询名"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
+        />
+        <button
+          onClick={(event) => {
+            event.preventDefault();
+            handleQueryTask(searchQuery);
+          }}
+        >
+          查询任务
+        </button>
+      </div>
+    </>
   );
 }
