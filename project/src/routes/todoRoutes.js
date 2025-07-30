@@ -7,15 +7,13 @@ import {
   updateTodo,
   searchAllTodos,
 } from "../controllers/todoController.js";
+
 const router = Router();
 
-router.get("/todo", getTodos).post("/todo", createTodo);
+router.route("/todo").get(getTodos).post(createTodo);
 
-router.post("/todo/search", searchAllTodos);
+router.route("/todo/search").get(searchAllTodos);
 
-router
-  .get("/todo/:id", getTodoById)
-  .delete("/todo/:id", deleteTodoById)
-  .post("/todo/:id", updateTodo);
+router.route("/todo/:id").get(getTodoById).delete(deleteTodoById).post(updateTodo);
 
 export default router;
