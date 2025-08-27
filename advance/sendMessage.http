@@ -1,0 +1,8 @@
+POST http://localhost:3000/send/mail HTTP/1.1
+Content-Type: application/json
+
+{
+    "to": "2025125585@qq.com",
+    "subject": "Test",
+    "text": "This is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test messageThis is a test message"
+}
